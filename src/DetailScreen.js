@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import AudioPlayer from './AudioPlayer';
 
-
 const DetailScreen = (props) => {
     const { thumbnail, title, url, episodes } = props.location.podcasts[props.match.params.id - 1];
 
@@ -15,7 +14,7 @@ const DetailScreen = (props) => {
                 <h3 style={{ color: 'white' }}>{title}</h3>
                 <a href={url} style={{ color: '#11e2d4', fontSize: '12px' }}>{url}</a>
                 {
-                    episodes && episodes.map(episode => <AudioPlayer audio={episode.audio} />)
+                    episodes && episodes.map(episode => <AudioPlayer key={episode.id} audio={episode.audio} />)
                 }
                 <Link
                     style={{

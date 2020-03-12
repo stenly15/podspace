@@ -1,9 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import DetailScreen from './DetailScreen';
 import ListScreen from './ListScreen';
+import Logo from './Logo';
 
 class App extends React.Component {
   constructor() {
@@ -30,6 +30,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <Logo />
         <div className="app-container">
           <Switch>
             <Route exact path='/' component={() => <ListScreen
@@ -45,12 +46,6 @@ class App extends React.Component {
     );
   }
 }
-
-const Home = () => {
-  return (
-    <div><h1>Home</h1></div>
-  )
-};
 
 
 export default App;
