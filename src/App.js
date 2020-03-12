@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
-import DetailScreen from './DetailScreen';
-import ListScreen from './ListScreen';
-import Logo from './Logo';
+import DetailScreen from './screens/DetailScreen';
+import ListScreen from './screens/ListScreen';
+import Logo from './screens/Logo';
 
 class App extends React.Component {
   constructor() {
