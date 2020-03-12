@@ -1,15 +1,16 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Search from './Search';
-import ListPodcast from './ListPodcast';
+import DetailScreen from './DetailScreen';
+import ListScreen from './ListScreen';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       podcasts: [],
-      searchPodcast: ''
+      searchPodcast: '',
+      screen: 'list'
     }
   }
 
@@ -19,31 +20,34 @@ class App extends React.Component {
       .then(podcasts => this.setState({ podcasts }))
   }
 
-  render() {
-    const { podcasts, searchPodcast } = this.state;
-    const filteredPodcast = podcasts.filter(podcast => podcast.title.toLowerCase().includes(searchPodcast.toLowerCase()));
+  onNavigateToListScreen = () => this.setState({ screen: 'list' });
 
+  onNavigateToDetailScreen = () => this.setState({ screen: 'detail' });
+
+  handleSearchText = event => this.setState({ searchPodcast: event.target.value })
+
+  render() {
     return (
       <div className="App">
         <div className="app-container">
-          <div className="header-container">
-            <Search
-              placeholder="Cari podcast..."
-              handleChange={e => this.setState({ searchPodcast: e.target.value })}
-            />
-          </div>
           {
-            filteredPodcast.map(item => {
-              return (
-                <ListPodcast key={item.id} title={item.title} url={item.url} thumbnail={item.thumbnail} />
-              )
-            })
+            this.state.screen === 'list' && (
+              <ListScreen
+                podcasts={this.state.podcasts}
+                searchPodcast={this.state.searchPodcast}
+                handleSearchText={this.handleSearchText}
+                onNavigateToDetailScreen={this.onNavigateToDetailScreen} />
+            )
+          }
+          {
+            this.state.screen === 'detail' && (
+              <DetailScreen onNavigateToListScreen={this.onNavigateToListScreen} />
+            )
           }
         </div>
       </div>
     );
   }
-
 }
 
 export default App;

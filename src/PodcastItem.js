@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ListPodcast = ({ thumbnail, title, url }) => {
+const PodcastItem = ({ thumbnail, title, url, onNavigateToDetailScreen }) => {
     return (
         <div className="list-container">
             <div className="list-item-image-container">
@@ -9,20 +9,18 @@ const ListPodcast = ({ thumbnail, title, url }) => {
             <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '2em' }}>
                 <h3 style={{ color: 'white' }}>{title}</h3>
                 <a href={url} style={{ color: '#11e2d4', fontSize: '12px' }}>{url}</a>
-                <input
-                    type="submit"
-                    value="Lihat >>"
-                    back
+                <a href='#'
                     style={{
                         marginTop: '10px',
                         color: '#11e2d4',
                         backgroundColor: '#282727',
                         border: '0.15em solid #11e2d4',
                         width: '5em',
-                    }} />
+                    }}
+                    onClick={onNavigateToDetailScreen}>Lihat >></a>
             </div>
         </div>
     )
 }
 
-export default ListPodcast;
+export default PodcastItem;
