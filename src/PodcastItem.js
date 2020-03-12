@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const PodcastItem = ({ thumbnail, title, url, onNavigateToDetailScreen }) => {
+const PodcastItem = ({ id, thumbnail, title, url, podcasts }) => {
     return (
         <div className="list-container">
             <div className="list-item-image-container">
@@ -9,7 +10,7 @@ const PodcastItem = ({ thumbnail, title, url, onNavigateToDetailScreen }) => {
             <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '2em' }}>
                 <h3 style={{ color: 'white' }}>{title}</h3>
                 <a href={url} style={{ color: '#11e2d4', fontSize: '12px' }}>{url}</a>
-                <a href='#'
+                <Link
                     style={{
                         marginTop: '10px',
                         color: '#11e2d4',
@@ -17,7 +18,13 @@ const PodcastItem = ({ thumbnail, title, url, onNavigateToDetailScreen }) => {
                         border: '0.15em solid #11e2d4',
                         width: '5em',
                     }}
-                    onClick={onNavigateToDetailScreen}>Lihat >></a>
+
+                    to={
+                        {
+                            pathname: `/detail/${id}`,
+                            podcasts: podcasts
+                        }}
+                > Lihat >> </Link>
             </div>
         </div>
     )

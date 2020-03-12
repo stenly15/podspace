@@ -2,7 +2,7 @@ import React from 'react';
 import PodcastItem from './PodcastItem';
 import Search from './Search';
 
-const ListScreen = ({ handleSearchText, onNavigateToDetailScreen, podcasts, searchPodcast }) => {
+const ListScreen = ({ handleSearchText, podcasts, searchPodcast }) => {
 
     const filteredPodcast = podcasts.filter(podcast => podcast.title.toLowerCase().includes(searchPodcast.toLowerCase()));
     return (
@@ -17,11 +17,12 @@ const ListScreen = ({ handleSearchText, onNavigateToDetailScreen, podcasts, sear
                 filteredPodcast.map(item => {
                     return (
                         <PodcastItem
+                            podcasts={podcasts}
                             key={item.id}
+                            id={item.id}
                             title={item.title}
                             url={item.url}
                             thumbnail={item.thumbnail}
-                            onNavigateToDetailScreen={onNavigateToDetailScreen}
                         />
                     )
                 })

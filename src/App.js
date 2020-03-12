@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Route, Switch, Link } from 'react-router-dom';
 import DetailScreen from './DetailScreen';
 import ListScreen from './ListScreen';
 
@@ -10,7 +11,7 @@ class App extends React.Component {
     this.state = {
       podcasts: [],
       searchPodcast: '',
-      screen: 'list'
+      screen: { name: 'list', id: '' }
     }
   }
 
@@ -20,9 +21,9 @@ class App extends React.Component {
       .then(podcasts => this.setState({ podcasts }))
   }
 
-  onNavigateToListScreen = () => this.setState({ screen: 'list' });
+  onNavigateToListScreen = () => this.setState({ screen: { name: 'list' } });
 
-  onNavigateToDetailScreen = () => this.setState({ screen: 'detail' });
+  onNavigateToDetailScreen = () => this.setState({ screen: { name: 'detail' } });
 
   handleSearchText = event => this.setState({ searchPodcast: event.target.value })
 
@@ -30,24 +31,26 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="app-container">
-          {
-            this.state.screen === 'list' && (
-              <ListScreen
-                podcasts={this.state.podcasts}
-                searchPodcast={this.state.searchPodcast}
-                handleSearchText={this.handleSearchText}
-                onNavigateToDetailScreen={this.onNavigateToDetailScreen} />
-            )
-          }
-          {
-            this.state.screen === 'detail' && (
-              <DetailScreen onNavigateToListScreen={this.onNavigateToListScreen} />
-            )
-          }
+          <Switch>
+            <Route exact path='/' component={() => <ListScreen
+              podcasts={this.state.podcasts}
+              searchPodcast={this.state.searchPodcast}
+              handleSearchText={this.handleSearchText}
+              onNavigateToDetailScreen={this.onNavigateToDetailScreen} />} />
+            <Route exact path='/detail/:id' component={DetailScreen} />
+          </Switch>
+
         </div>
       </div>
     );
   }
 }
+
+const Home = () => {
+  return (
+    <div><h1>Home</h1></div>
+  )
+};
+
 
 export default App;

@@ -35,3 +35,7 @@ body {
 .list-item-image-container > img {
   height: 8em;
 }
+
+.list-item-image-container-detail > img {
+  height: 12em;
+}
